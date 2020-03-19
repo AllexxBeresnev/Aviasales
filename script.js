@@ -5,12 +5,18 @@ const formSearch = document.querySelector(".form-search"),
     dropdownCitiesTo = document.querySelector(".dropdown__cities-to"),
     inputDateDepart = document.querySelector(".input__date-depart-to");
 
+    // Данные
     const city = ['Москва','Санкт-Петербург','Екатеринбург','Самара','Челябинск','Минск','Барнаул','Новосибирск','Кемерово','Нижний Новгород','Пенза'];
+    
+    //const citiesApi = 'http://api.travelpayouts.com/data/ru/cities.json',
+        const citiesApi = 'databases/cities.json',
+        proxy = 'https://cors-anywhere.herokuapp.com/';
 
     const getData = (url, callback) => {
         const request = new XMLHttpRequest;
 
         request.open('GET', url);
+
         request.addEventListener('readystatechange', () => {
             if (request.readyState !== 4) return;
 
@@ -24,10 +30,8 @@ const formSearch = document.querySelector(".form-search"),
 
         });
 
-
         request.send();
-//        .then(response => response.json())
-//        .then(json => console.log(json)));
+
     }
 
 
@@ -78,7 +82,10 @@ const formSearch = document.querySelector(".form-search"),
     });
 
     // Вызовы функций
-    getData();
+    //getData(proxy + citiesApi, (data) => {
+    getData(citiesApi, (data) => {
+        console.log(JSON.parse(data));
+    });
 
  //   console.log(formSearch,inputCitiesFrom);
 //    console.log(inputCitiesTo,dropdownCitiesFrom);
